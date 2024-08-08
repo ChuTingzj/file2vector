@@ -10,4 +10,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 calamine = "0.25.0"
-wasm-bindgen = {version="0.2.92",features = ['serde-serialize']}
+wasm-bindgen = {version="0.2.92"}
+gloo-utils = { version = "0.1", features = ["serde"] }

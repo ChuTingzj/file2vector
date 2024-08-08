@@ -1,6 +1,7 @@
 use wasm_bindgen::prelude::*;
 use calamine::{Reader, Xlsx, Data};
 use std::io::Cursor;
+use gloo_utils::format::JsValueSerdeExt;
 
 #[wasm_bindgen]
 pub fn parse(data:&[u8])->JsValue{
