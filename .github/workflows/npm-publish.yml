@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1.9.0
@@ -20,7 +23,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: cd pkg && npm publish
+      - run: cd pkg && npm publish --provenance --access public
         env:
-          NPM_TOKEN: ${{secrets.npm_token}}
+          npm_token: ${{secrets.NPM_TOKEN}}
       
