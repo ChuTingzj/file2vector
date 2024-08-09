@@ -14,16 +14,25 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions-rust-lang/setup-rust-toolchain@v1.9.0
-      - run: cargo build
-      - run: cargo install wasm-pack
-      - run: wasm-pack build --target web --release --scope console1024
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: setup rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1.9.0
+      - name: build crates
+        run: cargo build
+      - name: install wasm-pack
+        run: cargo install wasm-pack
+      - name: build wasm
+        run: wasm-pack build --target web --release --scope console1024
+      - name: setup nodejs
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: cd pkg && npm publish --access public
+      - name: change position
+        run: cd pkg
+      - name: publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       
